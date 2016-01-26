@@ -138,11 +138,41 @@ func Term(cd string) <-chan string {
       c <- fmt.Sprintf("%s", byt)
       return
     }else {
-      c <- fmt.Sprintf("%s", "syam{p} currently does not support that manny arguments")
+      cmdSlice := spaces[0]
+      comm = cd[:cmdSlice]
+
+      var args []string
+
+      ar := cd[cmdSlice:]
+      strArgs := ar[1:]
+      magic(strArgs, &args)
+
+      cmd := exec.Command(comm, args...)
+      byt, err := cmd.Output()
+      if err != nil {
+        c <- fmt.Sprintf("%s", err)
+      }
+      c <- fmt.Sprintf("%s", byt)
       return
     }
 
   }()
 
   return c
+}
+// this recursive function gets two or more arguments from a string
+// and appends each one to a slice.
+func magic(str string, ptrargs *[]string) {
+  var space []int
+  for i := 0; i < len(str); i++ {
+    if string(str[i]) == " " {
+      space = append(space, i)
+    }
+  }
+  if len(space) == 0 {
+    *ptrargs = append(*ptrargs, str)
+    return
+  }
+  *ptrargs = append(*ptrargs, str[:space[0]])
+  magic(str[(space[0]+1):], ptrargs)
 }
