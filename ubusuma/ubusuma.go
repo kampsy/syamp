@@ -160,7 +160,7 @@ func Term(cd string) <-chan string {
 
   return c
 }
-// this recursive function gets two or more arguments from a string
+// This recursive function gets two or more arguments from a string
 // and appends each one to a slice.
 func magic(str string, ptrargs *[]string) {
   var space []int
