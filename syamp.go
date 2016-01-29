@@ -12,8 +12,8 @@ import (
   "io/ioutil"
   "encoding/json"
   "time"
-  "github.com/syamp/ubusuma"
-  "github.com/syamp/random"
+  "github.com/kampsy/syamp/ubusuma"
+  "github.com/kampsy/syamp/random"
 )
 
 type WebPage struct {

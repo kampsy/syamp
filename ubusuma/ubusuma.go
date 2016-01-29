@@ -79,7 +79,7 @@ func Kill(pid string) <-chan string {
   return c
 }
 
-
+// Run normal commands
 func Term(cd string) <-chan string {
   c := make(chan string)
   go func() {
@@ -108,7 +108,7 @@ func Term(cd string) <-chan string {
       }
     }
 
-    // Run the single commant without arguments
+    // Run the single command without arguments
     if len(spaces) == 0 {
       comm = cd
       cmd := exec.Command(comm)
@@ -116,8 +116,9 @@ func Term(cd string) <-chan string {
       if err != nil {
         c <- fmt.Sprintf("%s", err)
       }
+      
       c <- fmt.Sprintf("%s", byt)
-      return
+
     }else if len(spaces) == 1 { // Now deal with one argument
       cmdSlice := spaces[0]
       comm = cd[:cmdSlice] // remember this variable?
@@ -135,8 +136,9 @@ func Term(cd string) <-chan string {
       if err != nil {
         c <- fmt.Sprintf("%s", err)
       }
+
       c <- fmt.Sprintf("%s", byt)
-      return
+
     }else {
       cmdSlice := spaces[0]
       comm = cd[:cmdSlice]
@@ -153,7 +155,6 @@ func Term(cd string) <-chan string {
         c <- fmt.Sprintf("%s", err)
       }
       c <- fmt.Sprintf("%s", byt)
-      return
     }
 
   }()
