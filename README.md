@@ -22,7 +22,7 @@ syam{p} only supports Linux at the moment.
 
 Installation
 -------------
-go get github.com/gophergala2016/syamp
+go get github.com/kampsy/syamp
 
 Running
 --------
